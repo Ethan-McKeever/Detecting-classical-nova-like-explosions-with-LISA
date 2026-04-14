@@ -80,7 +80,7 @@ def DeltaParams(Fisher, FishernbInv, gamma, t_b):
         j += 1
     return Deltamu
 
-def metric2func(Deltavar, t_b):
+def metric2func(Deltavar, t_b):  #Calculates the contribution to the fitting factor from the Fisher matrix of second derivatives
     i = 1
     metric2 = 0.0
     while i < 5:
@@ -122,7 +122,7 @@ def metric2func(Deltavar, t_b):
     metric2 = -metric2 / 8.0
     return metric2
 
-def FFfunc(Fisher, Deltavar, t_b):
+def FFfunc(Fisher, Deltavar, t_b):  #Calculates the fitting factor at 2nd or 4th order in the parameter shifts
     i = 0
     metric = 0.0
     metric2 = 0.0

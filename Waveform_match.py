@@ -14,7 +14,7 @@ import matplotlib as mpl
 from matplotlib.ticker import MultipleLocator,FormatStrFormatter,MaxNLocator,FuncFormatter
 import scipy.special
 
-def integrate(params1, params2, simp3, simp5, Tobs):
+def integrate(params1, params2, simp3, simp5, Tobs):   #this function performs the integral for the inner product
     
     tmin = 0.0
     tmax = 1.0
@@ -116,7 +116,7 @@ def integrate(params1, params2, simp3, simp5, Tobs):
     
 
 
-def integrand0(t, params1, params2, Tobs):
+def integrand0(t, params1, params2, Tobs):  #integrand for use with a loop
     
     if(t > params1[5]):
         phi1 = 2.0*np.pi*((params1[2])*t+0.5*(params1[3])*t*t+(params1[4])*(t-params1[5]))+(params1[1])  
@@ -134,7 +134,7 @@ def integrand0(t, params1, params2, Tobs):
     
     return(ll)
 
-def integrand(t, params1, params2, flag1, flag2, Tobs):
+def integrand(t, params1, params2, flag1, flag2, Tobs):  #integrand for use with arrays
     
     phi1 = params1[1] + 2.0*np.pi*params1[2]*t + np.pi*params1[3]*t*t +  2.0*np.pi*params1[4] * (t-params1[5]) * flag1
     phi2 = params2[1] + 2.0*np.pi*params2[2]*t + np.pi*params2[3]*t*t +  2.0*np.pi*params2[4] * (t-params2[5]) * flag2
@@ -144,7 +144,7 @@ def integrand(t, params1, params2, flag1, flag2, Tobs):
     return ll
     
     
-def wavematch(f_shift, t_b, params1, simp3, simp5, Tobs, length):
+def wavematch(f_shift, t_b, params1, simp3, simp5, Tobs, length):  #finds the fitting factor
     
     paramsp = np.zeros(6)
     params2 = np.zeros(6)
@@ -181,7 +181,7 @@ def phase(t, params, Tobs, flag):
     phi = params[1] + 2.0*np.pi*params[2]*t + np.pi*params[3]*t*t +  2.0*np.pi*params[4] * (t-params[5]) * flag
     return phi
 
-def MyFormatter(x,lim):
+def MyFormatter(x,lim):   #formatting for plots
       if x == 0:
           return 0
       else:
@@ -213,9 +213,8 @@ def main():
     ax.yaxis.set_minor_locator(MultipleLocator(0.1))
     
     
-    tcomp_i = time.perf_counter()
+    tcomp_i = time.perf_counter()  #setting initial time
     year = 3.15581498e7
-
     
     simp3 = np.zeros(3)
     simp5 = np.zeros(5)
@@ -233,11 +232,11 @@ def main():
     Tobs = 4.0 * year
     freq = 0.0097
     fdot = -3.1e-15
-    t_b_min = 0.01
+    t_b_min = 0.01      #set parameter ranges
     t_b_max = 0.99
-    f_shift_max = -freq*1.e-5*5.0*Tobs
+    f_shift_max = -freq*1.e-4*5.0*Tobs    
     f_shift_min = -freq*1.e-7*Tobs
-    t_steps = 100.0
+    t_steps = 100.0    #set granularity of plots
     f_steps = 100.0
     t_stepsize = (t_b_max - t_b_min) / (t_steps - 1.0)
     f_stepsize = pow(f_shift_max/f_shift_min, 1.0/(f_steps-1.0))
@@ -260,6 +259,7 @@ def main():
     SNRarray = np.zeros((int(t_steps), int(f_steps)))
     
     biasflag = 0 #0 for detection, 1 for beta bias
+    C = 1.0
 
     i = 0
     while(t_b <= t_b_max+(t_stepsize/2.0)):
@@ -268,7 +268,7 @@ def main():
         while(f_shift >= f_shift_max * 1.00005):
             if biasflag == 0:
                 match = wavematch(f_shift, t_b, params1, simp3, simp5, Tobs, length);
-                var1 = -(1-match**2.0) * np.sqrt(3.0) / (2.0 * np.pi * np.exp(0.5) * t_b**2.0 * (t_b - 1)**2.0 * (f_shift)**2.0 * 23.0259)
+                var1 = -(1-match**2.0) * np.sqrt(3.0) / (2.0 * np.pi * np.exp(0.5) * t_b**2.0 * (t_b - 1)**2.0 * (f_shift)**2.0 * 23.0259/C)
                 var2 = (1.0 - 5.0 * t_b + 10.0 * t_b**2.0 - 10.0*t_b**3.0 + 5.0 * t_b**4.0)**0.5
                 c = var1/var2
                 a = -(1-match**2.0) / 2.0
@@ -299,7 +299,7 @@ def main():
         filename = "Waveform_match_bias.pdf"
     
     plt.xscale('log')
-    plt.xlabel(r'$-\gamma$', fontsize = 30)
+    plt.xlabel(r'$|\gamma|$', fontsize = 30)
     plt.ylabel(r'$t_b$', fontsize = 30)
     
     plt.savefig(filename)

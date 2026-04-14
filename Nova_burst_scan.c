@@ -565,12 +565,16 @@ void MCMCrun(double f_shift, double t_b, double SNR, FILE* bayes_nova)
     fclose(burn_nova);
     fclose(heats_nova);
  
+    bayes_nova = fopen("bayes_nova6.dat","a");
     //N11 is the number of points in the nonburst model, N22 is # of points in burst model, N12 is number of jumps from noburst to burst, N21 for burst to nonburst
     N1 = N11[0] + N12[0];
     N2 = N22[0] + N21[0];
+    Nfac = sqrt((N1 - N12[0]) / (N1 * N12[0]) + (N2 - N21[0]) / (N2 * N21[0])); //Estimated error in the Bayes Factor
     //priorratio = 0.5 * exp(-0.5 * 0.4086 * pow(SNR,2.0));
     priorratio = 1.0;
     BF = N22[0] / (N11[0] * priorratio);
+
+    fprintf(bayes_nova, "%e %e %e %e %e %e %e\n", SNR, BF, log(BF), Nfac, BF*Nfac, N22[0]/N11[0], N12[0]);
 
     free_double_vector(paramsp);
     free_double_vector(params1);
