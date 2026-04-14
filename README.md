@@ -1,6 +1,6 @@
 # Detecting-classical-nova-like-explosions-with-LISA
 This repository includes all relevant programs used to prepare the paper of the same name.
-This Document contains the software license for this repository as well as descriptions of each program
+This Document contains the software license for this repository as well as descriptions of each program.
 
 License:
 Copyright (c) 2026 Neil Cornish & Ethan McKeever
@@ -22,9 +22,9 @@ Program List:
 
 Nova_burst.c is the main RJMCMC used for parameter estimation in this work.
 
-Nova_burst_scan.c is the RJMCMC set up to scan across one parameter such as burst magnitude, time of burst, or SNR. This program prints Bayes factors to bayes_nova.dat
+Nova_burst_scan.c is the RJMCMC set up to scan across one parameter such as burst magnitude, time of burst, or SNR. This program prints Bayes factors to bayes_nova.dat.
 
-Both programs above compile to Nova_burst
+Both programs above compile to Nova_burst.
 
 The sampling for both programs is done using a combination of jumps along the eigenvectors of the Fisher information matrix, independent gaussian jumps for each parameter, and model specific differential evolution. The jumps between models are calculated on the same level at the same time as jumps within each model. 
 
@@ -34,7 +34,7 @@ Both codes used parallel processing via OpenMP. We installed GSL and OpenMP via 
 
 corner_nova.py plots a corner plot of all 6 waveform parameters and overlays an ellipse for each plot from the Fisher matrix 1-sigma prediction.
 
-corner_bias.py plots paired corner plots from two distributions and was used in the making of Fig. 7 in the paper
+corner_bias.py plots paired corner plots from two distributions and was used in the making of Fig. 7 in the paper.
 
 
 Waveform_match.py scans for detection and bias SNRs over the size and time of burst. This program was used for the left panels of Figs. 3 and 5.
@@ -48,4 +48,4 @@ ScanSNR.py calculates detection SNRs for a variety of SNRs and loads in points f
 FF_Fisher calculates the fitting factor at 2nd or 4th order in given parameter shifts and calculates the parameter shifts from not including the effects of the burst at the 2nd order level.
 
 
-test_match.py quickly calculates the fractional shift in frequency, fitting factor, detection SNR, and bias SNR for a given pair of burst parameters
+test_match.py quickly calculates the fractional shift in frequency, fitting factor, detection SNR, and bias SNR for a given pair of burst parameters.
