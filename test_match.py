@@ -179,8 +179,8 @@ def main():
     freq = 0.0097
     fdot = -1.0e-15
     
-    t_b=0.33  #set time of burst and gamma here
-    gamma = -1.5
+    t_b=0.03  #set time of burst and gamma here
+    gamma = -2.5
     
     
 
@@ -227,7 +227,13 @@ def main():
     c = var1/var2
     a = -(1-match**2.0) / 2.0
     w = scipy.special.lambertw(c, k=-1)
+    #w = np.log(-c)
     detSNR = np.sqrt(w/a).real
+    
+    sqrtnum = 1 - 4.0 * t_b * (1.0 - t_b) * (2.0 - 5.0 * t_b * (1.0 - t_b))
+    sqrtden = t_b**3.0 * (1.0 - t_b)**3.0 * (1.0 - 5.0 * t_b * (1.0 - t_b) * (1.0 - t_b * (1.0 - t_b)))
+    detSNReq19 = np.sqrt(3.0) / (np.pi * np.abs(gamma)) * np.sqrt(sqrtnum/sqrtden)
+    detSNRnooccam = 1.0/np.sqrt(1.0 - match**2.0)
     
     print("gamma:", gamma)
     print("Time of Burst:", t_b)
@@ -235,6 +241,9 @@ def main():
     print("Fitting Factor:", match)
     print("Bias SNR:", biasSNR)
     print("Detection SNR:", detSNR)
+    print("Detection SNR, no Occam", np.sqrt(1.0/(1.0 - match**2.0)))
+    print(np.sqrt(1.0 / (2.0 * (1.0- match))))
+    print(detSNReq19, detSNRnooccam)
     
 if __name__ == '__main__':
     main()

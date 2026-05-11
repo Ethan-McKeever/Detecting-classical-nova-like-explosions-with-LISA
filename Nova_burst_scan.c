@@ -782,7 +782,7 @@ void update(int n, int np, int npl, int nh, int ptest, int priorflag, int *who, 
     }
 
     if(paramsy[0] < 0.0 || paramsy[2] < 0.0) flag = 1;
-    if(paramsy[0] > 1.0e6 || paramsy[2] > 0.1) flag = 1;
+    if(paramsy[0] > 1.0e3 || paramsy[2] > 0.1) flag = 1;
     if(paramsy[1] > PI) paramsy[1] = -2.0*PI + paramsy[1];
     if(paramsy[1] < -PI) paramsy[1] = 2.0*PI + paramsy[1];
     if(paramsy[2] > fmx || paramsy[2] < fmn) flag = 1;  // prior on frequency

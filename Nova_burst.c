@@ -175,7 +175,7 @@ int main(void)
     
     // A, phi0, f0, fdot, f_shift=Delta f / f, t_b
 
-    Tobs = 4.0*year;
+    Tobs = 2.0*year;
 
     fdot = -3.1e-15;
     freq = 0.0097;// + Tobs * fdot;      //use +Tobs * fdot for second two year observation time if comparing as in Fig. 7
@@ -793,7 +793,7 @@ void update(int n, int np, int npl, int nh, int ptest, int priorflag, int *who, 
         logpy = log(1.0/ fabs(paramsy[4]));
     }
 
-    if(paramsy[0] < 0.0 || paramsy[0] > 1.0e6) flag = 1;
+    if(paramsy[0] < 0.0 || paramsy[0] > 1.0e3) flag = 1;
     if(paramsy[3] > 1.0 || paramsy[3] < -1.0) flag = 1;
     if(paramsy[1] > PI) paramsy[1] = -2.0*PI + paramsy[1];
     if(paramsy[1] < -PI) paramsy[1] = 2.0*PI + paramsy[1];

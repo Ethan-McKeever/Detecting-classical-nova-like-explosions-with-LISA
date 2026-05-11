@@ -20,7 +20,7 @@ mpl.rcParams['ps.fonttype'] = 42
 mpl.rcParams['font.family'] = 'Arial'
 
 fig = plt.figure(figsize=(9,7))
-ax = plt.axes((0.08,0.1,0.88,0.8))
+ax = plt.axes((0.12,0.1,0.86,0.8))
 
 ax.tick_params(which="both", bottom=True, top=True, left=True, right=True)
 ax.tick_params(which="both", labelbottom=True, labeltop=False, labelleft=True, labelright=False, labelsize=16)
@@ -34,8 +34,6 @@ ax.xaxis.set_minor_locator(MultipleLocator(1))
 
 major_formatter = FuncFormatter(MyFormatter)
 filename = "SNRplot1.pdf"
-
-
 
 bayesfilename = "bayes_nova.dat"   #loading in Bayes Factor data for red triangle points
 SNRlist1 = np.loadtxt(bayesfilename, usecols = 0)
@@ -66,7 +64,7 @@ p4 = plt.plot(SNRlist1, (lnBFlist), 'r^', markersize=13)
 plt.axhline(0.5, color='black', linestyle='dashed', linewidth = 4.0)
 
 ax.legend(handles=[p1[0],p2[0],p3[0],p4[0]],
-labels=[r'$\ln \mathcal{B}_{21}, C = 1$',r'$\ln \mathcal{B}_{21}, C = 2.5$',r'$\ln \mathcal{B}_{21}, \Delta \ln \mathcal{O}=0$',r'$\ln \mathcal{B}_{21}, {RJMCMC}$'],
+labels=[r'$C = 1$',r'$C = 2.5$',r'$\Delta \ln \mathcal{O}=0$',r'RJMCMC'],
 loc='upper left',
 frameon=False,
 fontsize = 22)
@@ -75,7 +73,7 @@ fig.suptitle(r'$\gamma = -1.5, t_b = 0.33$', fontsize=28)#, horizontalalignment 
 
 plt.yscale('log')
 plt.xlabel(r'$SNR$',fontsize=26)
-#plt.ylabel(r'$\ln \mathcal{B}_{21}$',fontsize=26)
+plt.ylabel(r'$\ln \mathcal{B}_{21}$',fontsize=26)
 plt.ylim(0.3, 30)
 plt.xlim(10, 21.7)
 plt.savefig(filename)
