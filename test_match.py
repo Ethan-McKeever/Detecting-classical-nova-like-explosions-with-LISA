@@ -179,8 +179,8 @@ def main():
     freq = 0.0097
     fdot = -1.0e-15
     
-    t_b=0.03  #set time of burst and gamma here
-    gamma = -2.5
+    t_b=0.2  #set time of burst and gamma here
+    gamma = -3.0
     
     
 
