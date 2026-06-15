@@ -46,6 +46,7 @@ ScanSNR.py calculates detection SNRs for a variety of SNRs and loads in points f
 
 Phaseplots.py is used to make plots showing phase deviation from true values and was used to create Figs. 3 and 6.
 
+Nova_demo.py was used to make Fig. 1.
 
 FF_Fisher calculates the fitting factor at 2nd or 4th order in given parameter shifts and calculates the parameter shifts from not including the effects of the burst at the 2nd order level.
 
