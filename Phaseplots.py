@@ -232,7 +232,7 @@ def main():
     length = freq * Tobs * 30 / 1000.0
     
     #Use this block to make Fig 6.
-    '''
+    
     gamma = -1.0
     
     paramsp[0] = 1.0
@@ -313,7 +313,7 @@ def main():
     plt.ylabel(r'$\phi(t) - \phi_{\rm{tr}}(t)$', fontsize = 18)
 
     filename = "phasechecks2.pdf"
-    '''
+    
     
     #Use this block to make Fig 3.
     '''
