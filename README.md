@@ -32,17 +32,19 @@ The code uses a noise free likelihood. The output of the RJMCMC gets written to 
 
 Both codes used parallel processing via OpenMP. We installed GSL and OpenMP via Homebrew on our Macs, which require the compiler to point to where the libraries are placed, hence the ugly looking compile lines found at the top of each program.
 
-corner_nova.py plots a corner plot of all 6 waveform parameters and overlays an ellipse for each plot from the Fisher matrix 1-sigma prediction.
+corner_nova.py plots a corner plot of all 6 waveform parameters and overlays an ellipse for each plot from the Fisher matrix 1-sigma prediction. This can be modified to also use the log likelihood as a parameter as was done in Fig. 2. The log likelihood is the first data point on each line in the chain file.
 
-corner_bias.py plots paired corner plots from two distributions and was used in the making of Fig. 7 in the paper.
-
-
-Waveform_match.py scans for detection and bias SNRs over the size and time of burst. This program was used for the left panels of Figs. 3 and 5.
-
-LinePlots.py scans for detection and bias SNRs over the size of burst. This program was used for the right panels of Figs. 3 and 5.
+corner_bias.py plots paired corner plots from two distributions and was used in the making of Fig. 10 in the paper and was slightly adjusted to make Fig. 9.
 
 
-ScanSNR.py calculates detection SNRs for a variety of SNRs and loads in points from bayes_nova.dat for comparison. This program was used for Fig. 2.
+Waveform_match.py scans for detection and bias SNRs over the size and time of burst. This program was used for the left panels of Figs. 5 and 8.
+
+LinePlots.py scans for detection and bias SNRs over the size of burst. This program was used for the right panels of Figs. 5 and 8.
+
+
+ScanSNR.py calculates detection SNRs for a variety of SNRs and loads in points from bayes_nova.dat for comparison. This program was used for Figs. 4 and A1.
+
+Phaseplots.py is used to make plots showing phase deviation from true values and was used to create Figs. 3 and 6.
 
 
 FF_Fisher calculates the fitting factor at 2nd or 4th order in given parameter shifts and calculates the parameter shifts from not including the effects of the burst at the 2nd order level.
